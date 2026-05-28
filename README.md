@@ -1,6 +1,6 @@
 # smirnov
 
-Dependency-free inverse transform sampling for JavaScript and TypeScript.
+Dependency-free inverse transform sampling utilities.
 
 ## Install
 
