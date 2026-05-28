@@ -28,7 +28,7 @@ export function createInverseTransformSampler(options) {
     tolerance = DEFAULT_TOLERANCE,
     maxIterations = DEFAULT_MAX_ITERATIONS,
     searchStart = DEFAULT_SEARCH_START,
-    searchStep = DEFAULT_SEARCH_STEP
+    searchStep = DEFAULT_SEARCH_STEP,
   } = options ?? {};
 
   assertFunction(cdf, "cdf");
@@ -155,7 +155,7 @@ export function createInverseTransformSampler(options) {
     }
 
     throw new RangeError(
-      "could not find compact domain; provide min/max or increase maxIterations/searchStep"
+      "could not find compact domain; provide min/max or increase maxIterations/searchStep",
     );
   }
 
@@ -206,7 +206,7 @@ export function createPdfSampler(options) {
     integrationTolerance = tolerance,
     maxIntegrationDepth = DEFAULT_MAX_INTEGRATION_DEPTH,
     integrationSubdivisions = DEFAULT_INTEGRATION_SUBDIVISIONS,
-    pdfLipschitz
+    pdfLipschitz,
   } = options ?? {};
 
   assertFunction(pdf, "pdf");
@@ -242,7 +242,9 @@ export function createPdfSampler(options) {
   }
 
   if (totalMass <= 0) {
-    throw new RangeError("pdf must have positive mass over the effective domain");
+    throw new RangeError(
+      "pdf must have positive mass over the effective domain",
+    );
   }
 
   function quantile(probability) {
@@ -287,7 +289,7 @@ export function createPdfSampler(options) {
       return {
         effectiveMin: min,
         effectiveMax: max,
-        totalMass: integratePdf(min, max)
+        totalMass: integratePdf(min, max),
       };
     }
 
@@ -331,7 +333,7 @@ export function createPdfSampler(options) {
     }
 
     throw new RangeError(
-      "could not find compact domain with mass at least 1 - tolerance; provide min/max or increase maxIterations/searchStep"
+      "could not find compact domain with mass at least 1 - tolerance; provide min/max or increase maxIterations/searchStep",
     );
   }
 
@@ -353,22 +355,19 @@ export function createPdfSampler(options) {
     }
 
     throw new RangeError(
-      "could not find compact domain with mass at least 1 - tolerance; provide min/max or increase maxIterations/searchStep"
+      "could not find compact domain with mass at least 1 - tolerance; provide min/max or increase maxIterations/searchStep",
     );
   }
 
   function refineRadialMassDomain(innerRadius, outerRadius) {
     let radius = outerRadius;
-    let mass = domainAcceptanceMass(
-      searchStart - radius,
-      searchStart + radius
-    );
+    let mass = domainAcceptanceMass(searchStart - radius, searchStart + radius);
 
     for (let iteration = 0; iteration < maxIterations; iteration += 1) {
       const midpointRadius = (innerRadius + radius) / 2;
       const midpointMass = domainAcceptanceMass(
         searchStart - midpointRadius,
-        searchStart + midpointRadius
+        searchStart + midpointRadius,
       );
 
       if (midpointMass >= 1 - tolerance) {
@@ -389,7 +388,7 @@ export function createPdfSampler(options) {
     return {
       effectiveMin,
       effectiveMax,
-      totalMass: integratePdf(effectiveMin, effectiveMax)
+      totalMass: integratePdf(effectiveMin, effectiveMax),
     };
   }
 
@@ -417,7 +416,11 @@ export function createPdfSampler(options) {
       }
     }
 
-    return { effectiveMin: low, effectiveMax: high, totalMass: integratePdf(low, high) };
+    return {
+      effectiveMin: low,
+      effectiveMax: high,
+      totalMass: integratePdf(low, high),
+    };
   }
 
   function domainAcceptanceMass(a, b) {
@@ -440,7 +443,7 @@ export function createPdfSampler(options) {
       const segmentWidth = right - left;
       const segmentFloor = Math.max(
         0,
-        Math.min(leftDensity, rightDensity) - pdfLipschitz * segmentWidth
+        Math.min(leftDensity, rightDensity) - pdfLipschitz * segmentWidth,
       );
 
       lowerBound += segmentFloor * segmentWidth;
@@ -458,7 +461,7 @@ export function createPdfSampler(options) {
       b,
       integrationTolerance,
       maxIntegrationDepth,
-      integrationSubdivisions
+      integrationSubdivisions,
     );
   }
 
@@ -467,7 +470,7 @@ export function createPdfSampler(options) {
     quantile,
     min: effectiveMin,
     max: effectiveMax,
-    totalMass
+    totalMass,
   };
 }
 
@@ -595,17 +598,7 @@ function adaptiveSimpson(fn, a, b, tolerance, maxDepth, subdivisions = 1) {
   const fb = fn(b);
   const whole = simpsonArea(a, b, fa, fm, fb);
 
-  return adaptiveSimpsonStep(
-    fn,
-    a,
-    b,
-    fa,
-    fm,
-    fb,
-    whole,
-    tolerance,
-    maxDepth
-  );
+  return adaptiveSimpsonStep(fn, a, b, fa, fm, fb, whole, tolerance, maxDepth);
 }
 
 function adaptiveSimpsonStep(fn, a, b, fa, fm, fb, whole, tolerance, depth) {
@@ -632,7 +625,7 @@ function adaptiveSimpsonStep(fn, a, b, fa, fm, fb, whole, tolerance, depth) {
       fm,
       left,
       tolerance / 2,
-      depth - 1
+      depth - 1,
     ) +
     adaptiveSimpsonStep(
       fn,
@@ -643,7 +636,7 @@ function adaptiveSimpsonStep(fn, a, b, fa, fm, fb, whole, tolerance, depth) {
       fb,
       right,
       tolerance / 2,
-      depth - 1
+      depth - 1,
     )
   );
 }

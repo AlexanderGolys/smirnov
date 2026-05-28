@@ -22,7 +22,7 @@ import { createInverseTransformSampler } from "smirnov";
 const exponential = createInverseTransformSampler({
   cdf: (x) => 1 - Math.exp(-x),
   min: 0,
-  max: 20
+  max: 20,
 });
 
 const value = exponential.sample();
@@ -32,7 +32,7 @@ Bounds are optional:
 
 ```js
 const logistic = createInverseTransformSampler({
-  cdf: (x) => 1 / (1 + Math.exp(-x))
+  cdf: (x) => 1 / (1 + Math.exp(-x)),
 });
 
 const median = logistic.quantile(0.5);
@@ -54,7 +54,7 @@ import { createPdfSampler } from "smirnov";
 const triangular = createPdfSampler({
   pdf: (x) => 2 * x,
   min: 0,
-  max: 1
+  max: 1,
 });
 
 const value = triangular.sample();
@@ -86,7 +86,7 @@ import { createWeightedSampler } from "smirnov";
 const sampler = createWeightedSampler([
   ["small", 0.6],
   ["medium", 0.3],
-  ["large", 0.1]
+  ["large", 0.1],
 ]);
 
 const choice = sampler.sample();

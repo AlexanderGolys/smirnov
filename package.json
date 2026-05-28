@@ -1,7 +1,7 @@
 {
   "name": "smirnov",
   "version": "1.0.0",
-  "description": "Dependency-free inverse transform sampling utilities.",
+  "description": "Dependency-free sampling from custom CDFs and PDFs using the Smirnov transform (inverse transform sampling).",
   "type": "module",
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
@@ -24,9 +24,12 @@
   "keywords": [
     "inverse-transform-sampling",
     "sampling",
+    "sampler",
     "random",
     "statistics",
-    "probability"
+    "probability",
+    "cdf",
+    "pdf"
   ],
   "license": "MIT",
   "engines": {

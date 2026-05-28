@@ -15,11 +15,11 @@ export interface InverseTransformSampler {
 }
 
 export declare function createInverseTransformSampler(
-  options: InverseTransformSamplerOptions
+  options: InverseTransformSamplerOptions,
 ): InverseTransformSampler;
 
 export declare function sampleInverseTransform(
-  options: InverseTransformSamplerOptions
+  options: InverseTransformSamplerOptions,
 ): number;
 
 export interface PdfSamplerOptions {
@@ -45,7 +45,9 @@ export interface PdfSampler {
   readonly totalMass: number;
 }
 
-export declare function createPdfSampler(options: PdfSamplerOptions): PdfSampler;
+export declare function createPdfSampler(
+  options: PdfSamplerOptions,
+): PdfSampler;
 
 export declare function samplePdf(options: PdfSamplerOptions): number;
 
@@ -57,5 +59,5 @@ export interface WeightedSampler<T> {
 
 export declare function createWeightedSampler<T>(
   entries: Array<[T, number]>,
-  options?: { rng?: () => number }
+  options?: { rng?: () => number },
 ): WeightedSampler<T>;
