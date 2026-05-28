@@ -1,0 +1,35 @@
+{
+  "name": "smirnov",
+  "version": "0.1.0",
+  "description": "Inverse transform sampling utilities for JavaScript.",
+  "type": "module",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js"
+    }
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "lint": "node --check src/index.js",
+    "prepublishOnly": "npm test && npm run lint"
+  },
+  "keywords": [
+    "inverse-transform-sampling",
+    "sampling",
+    "random",
+    "statistics",
+    "probability"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}
