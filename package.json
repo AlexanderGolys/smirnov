@@ -1,7 +1,7 @@
 {
   "name": "smirnov",
-  "version": "0.1.0",
-  "description": "Inverse transform sampling utilities for JavaScript.",
+  "version": "1.0.0",
+  "description": "Dependency-free inverse transform sampling for JavaScript and TypeScript.",
   "type": "module",
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
